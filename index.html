@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EcoCash - Smart Reverse Vending Network & Contactless ATM EcoCard. Tap your EcoCard, deposit bottles and cans, earn EcoCredits, and redeem real-world rewards.">
+  <meta name="theme-color" content="#059669">
+  <title>EcoCash — Smart Reverse Vending & ATM EcoCard Platform</title>
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- ================= Site Header & Navigation ================= -->
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <!-- Brand Logo -->
+      <a href="#home" class="brand-logo" data-route="home">
+        <div class="logo-icon-wrapper">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+          </svg>
+        </div>
+        <span>Eco<span class="brand-accent">cash</span></span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav>
+        <ul class="nav-links" id="nav-links">
+          <li><a class="nav-link active" data-route="home">Home</a></li>
+          <li><a class="nav-link" data-route="dashboard">Dashboard</a></li>
+          <li><a class="nav-link" data-route="ecocard">
+            <span style="color: #34d399;">💳</span> My EcoCard
+          </a></li>
+          <li><a class="nav-link" data-route="simulator">
+            <span style="color: #10b981;">⚡</span> RVM Simulator
+          </a></li>
+          <li><a class="nav-link" data-route="transactions">Waste History</a></li>
+          <li><a class="nav-link" data-route="rewards">
+            <span style="color: #f59e0b;">🎁</span> Redeem Rewards
+          </a></li>
+          <li><a class="nav-link" data-route="leaderboard">Leaderboard</a></li>
+          <li><a class="nav-link" data-route="profile">Profile</a></li>
+          <li><a class="nav-link" data-route="about">About</a></li>
+        </ul>
+      </nav>
+
+      <!-- User Info & Auth Actions -->
+      <div class="header-actions">
+        <!-- Logged In User Pill -->
+        <div class="user-badge-btn" id="header-user-badge" title="Click to switch profile or view account">
+          <div class="user-avatar-pill" id="header-user-avatar">👨‍💼</div>
+          <div id="header-user-btn" style="text-align: left;">
+            <div class="user-name-text" id="header-user-name">Rahul</div>
+            <div class="user-balance-chip" id="header-user-balance">🪙 1,250 Credits</div>
+          </div>
+        </div>
+
+        <!-- Auth Buttons (Hidden when logged in) -->
+        <div id="header-auth-btns" style="display: none; gap: 0.5rem;">
+          <button class="btn btn-outline btn-sm" id="btn-open-login">Log In</button>
+          <button class="btn btn-primary btn-sm" id="btn-open-signup">Sign Up</button>
+        </div>
+
+        <!-- Mobile Menu Hamburger -->
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= Toast Notification Container ================= -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ================= PAGE 1: LANDING & HOME ================= -->
+  <main class="page-view active" id="page-home">
+    <div class="container">
+      
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-grid">
+          <!-- Hero Text -->
+          <div class="hero-content">
+            <div class="section-tag">
+              <span>🌱</span> Smart Reverse Vending & ATM EcoCard Network
+            </div>
+            <h1>Turn Waste into <span class="hero-highlight">EcoCredits</span> With Every Tap</h1>
+            <p class="hero-subtitle">
+              Get an ATM-like contactless EcoCard to tap at smart Reverse Vending Machines (RVMs). Deposit plastic bottles, bags, and cans to earn instant EcoCredits redeemable for transit passes, meals, and eco-rewards!
+            </p>
+
+            <div class="hero-cta-group">
+              <button class="btn btn-primary btn-lg" data-route="simulator">
+                <span>⚡ Test RVM Simulator</span>
+              </button>
+              <button class="btn btn-outline btn-lg" data-route="ecocard">
+                <span>💳 View My EcoCard</span>
+              </button>
+              <button class="btn btn-secondary btn-lg" id="hero-btn-login">
+                <span>🔑 Quick Expo Switch</span>
+              </button>
+            </div>
+
+            <!-- Live Aggregate Environmental Impact Row -->
+            <div class="hero-stats-row">
+              <div class="hero-stat-item">
+                <h4 id="impact-stat-plastic">2,485 kg</h4>
+                <p>Plastic Recycled</p>
+              </div>
+              <div class="hero-stat-item">
+                <h4 id="impact-stat-credits">🪙 248,500</h4>
+                <p>Credits Awarded</p>
+              </div>
+              <div class="hero-stat-item">
+                <h4 id="impact-stat-bottles">49,700 items</h4>
+                <p>Bottles & Cans Diverted</p>
+              </div>
+              <div class="hero-stat-item">
+                <h4 id="impact-stat-trees">178 Trees</h4>
+                <p>CO₂ Offset Equivalent</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Visual Kiosk & EcoCard Preview -->
+          <div class="hero-visual-card">
+            <div class="rvm-kiosk-preview">
+              <div class="kiosk-screen-top">
+                <div style="font-weight: 800; font-size: 0.95rem; color: #a7f3d0; display: flex; align-items: center; gap: 0.4rem;">
+                  <span>ECOCASH SMART RVM KIOSK</span>
+                </div>
+                <div class="kiosk-status-pill">
+                  <span class="status-dot"></span> ONLINE #102
+                </div>
+              </div>
+
+              <!-- Animated Contactless Tap Surface -->
+              <div style="background: rgba(16, 185, 129, 0.12); border: 2px dashed rgba(52, 211, 153, 0.4); border-radius: 12px; padding: 1.25rem; text-align: center; margin-bottom: 1.25rem;">
+                <div style="font-size: 2.2rem; margin-bottom: 0.3rem;">📶 💳</div>
+                <div style="font-size: 0.85rem; font-weight: 800; color: #34d399; letter-spacing: 0.05em;">TAP ECOCARD TO BEGIN</div>
+                <small style="color: #94a3b8; font-size: 0.75rem;">Instant RFID/NFC Account Sync</small>
+              </div>
+
+              <!-- Animated Deposit Slot -->
+              <div class="kiosk-deposit-slot" style="margin-bottom: 1.25rem;">
+                <span style="font-size: 1.6rem;">🍾</span>
+                <span style="font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em;">OPTICAL INTAKE CHAMBER</span>
+              </div>
+
+              <!-- Realtime preview metrics inside mockup -->
+              <div class="kiosk-metric-row">
+                <div class="kiosk-mini-card">
+                  <small>ACCEPTED RATE</small>
+                  <strong>100 Credits / kg</strong>
+                </div>
+                <div class="kiosk-mini-card">
+                  <small>CARD CREDIT</small>
+                  <strong style="color: #34d399;">Instant Card Top-Up</strong>
+                </div>
+              </div>
+
+              <div style="text-align: center; margin-top: 1rem;">
+                <button class="btn btn-primary btn-sm btn-full" data-route="simulator">
+                  Launch Live Demo Kiosk 🚀
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- "How It Works" Section -->
+      <section class="steps-section">
+        <div class="text-center">
+          <div class="section-tag">Circular Economy In 4 Steps</div>
+          <h2 class="section-title">How the EcoCard & RVM Ecosystem Works</h2>
+          <p class="section-desc">
+            Deposit recyclables seamlessly using your personal ATM-like contactless card and redeem accumulated credits for tangible everyday benefits.
+          </p>
+        </div>
+
+        <div class="steps-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+          <!-- Step 1 -->
+          <div class="step-card">
+            <div class="step-number-badge">1</div>
+            <div class="step-icon-box">💳</div>
+            <h3>Get Your ATM EcoCard</h3>
+            <p>
+              Each registered citizen is issued a personalized physical smart card with an embedded EMV chip, unique NFC UID, and secure tap-to-vend barcode.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step-card">
+            <div class="step-number-badge">2</div>
+            <div class="step-icon-box">📶</div>
+            <h3>Tap at Any Smart RVM</h3>
+            <p>
+              Walk up to any EcoCash Reverse Vending Machine at campus or transit hubs. Simply hold your card against the contactless reader pad to start the session.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step-card">
+            <div class="step-number-badge">3</div>
+            <div class="step-icon-box">🤖</div>
+            <h3>Deposit Bottles & Cans</h3>
+            <p>
+              Feed empty PET bottles or aluminum cans. The optical camera classifies polymers and precision strain gauges measure weight in grams.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="step-card">
+            <div class="step-number-badge">4</div>
+            <div class="step-icon-box">🎁</div>
+            <h3>Earn & Redeem Credits</h3>
+            <p>
+              Credits are instantly transferred to your card balance. Redeem them anytime for cafeteria meals, metro travel passes, and tree planting!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Rate Card Showcase -->
+      <section class="rates-section">
+        <div class="text-center">
+          <div class="section-tag">Transparent Credit Rewards</div>
+          <h2 class="section-title">Official Recyclables Rate Card</h2>
+          <p class="section-desc">
+            Fair and transparent EcoCredits credited to your card for every kilogram of post-consumer waste deposited.
+          </p>
+        </div>
+
+        <div class="rates-grid">
+          <!-- Rate Card 1: PET Bottles -->
+          <div class="rate-card featured">
+            <span class="rate-badge-popular">Highest Volume</span>
+            <div class="rate-waste-icon">🍾</div>
+            <h3>PET Bottles</h3>
+            <p style="color: #64748b; font-size: 0.9rem;">Drinking water, soda bottles, juice & beverage containers</p>
+            <div class="rate-price-tag">
+              <span class="rate-amount">100</span>
+              <span class="rate-unit">Credits / kg</span>
+            </div>
+            <ul class="rate-feature-list">
+              <li><span>✅</span> Clear & tinted plastic beverage bottles</li>
+              <li><span>✅</span> ~2 Credits earned per 500ml empty bottle</li>
+              <li><span>✅</span> 1.5 kg CO₂ offset per kg recycled</li>
+              <li><span>⚡</span> Instant credit to your EcoCard</li>
+            </ul>
+            <button class="btn btn-primary btn-full" data-route="simulator">Deposit PET Bottles</button>
+          </div>
+
+          <!-- Rate Card 2: Aluminum Cans -->
+          <div class="rate-card featured" style="border-color: #8b5cf6;">
+            <span class="rate-badge-popular" style="background: #8b5cf6;">Premium Value</span>
+            <div class="rate-waste-icon">🥫</div>
+            <h3>Aluminum Cans</h3>
+            <p style="color: #64748b; font-size: 0.9rem;">Soft drinks, sparkling water, juice, and energy drink cans</p>
+            <div class="rate-price-tag">
+              <span class="rate-amount" style="color: #8b5cf6;">120</span>
+              <span class="rate-unit">Credits / kg</span>
+            </div>
+            <ul class="rate-feature-list">
+              <li><span>✅</span> Infinite recyclability polymer & alloy</li>
+              <li><span>✅</span> ~65 empty cans per kilogram</li>
+              <li><span>✅</span> 2.1 kg CO₂ offset per kg recycled</li>
+              <li><span>⚡</span> High-speed shredder crushing</li>
+            </ul>
+            <button class="btn btn-primary btn-full" data-route="simulator" style="background: #8b5cf6;">Deposit Cans</button>
+          </div>
+
+          <!-- Rate Card 3: Rigid Plastics -->
+          <div class="rate-card">
+            <div class="rate-waste-icon">📦</div>
+            <h3>Rigid Plastics (HDPE / PP)</h3>
+            <p style="color: #64748b; font-size: 0.9rem;">Shampoo bottles, milk jugs, food tubs & bottle caps</p>
+            <div class="rate-price-tag">
+              <span class="rate-amount">75</span>
+              <span class="rate-unit">Credits / kg</span>
+            </div>
+            <ul class="rate-feature-list">
+              <li><span>✅</span> HDPE milk containers & detergent jugs</li>
+              <li><span>✅</span> Clean polypropylene caps and takeaway tubs</li>
+              <li><span>✅</span> 1.2 kg CO₂ offset per kg recycled</li>
+              <li><span>⚡</span> Heavyweight polymers earn rapidly</li>
+            </ul>
+            <button class="btn btn-secondary btn-full" data-route="simulator">Deposit Rigid Plastics</button>
+          </div>
+
+          <!-- Rate Card 4: Carry Bags -->
+          <div class="rate-card">
+            <div class="rate-waste-icon">🛍️</div>
+            <h3>Carry Bags & Clean Films</h3>
+            <p style="color: #64748b; font-size: 0.9rem;">Grocery carry bags, shopping polybags, clean LDPE wrap</p>
+            <div class="rate-price-tag">
+              <span class="rate-amount">50</span>
+              <span class="rate-unit">Credits / kg</span>
+            </div>
+            <ul class="rate-feature-list">
+              <li><span>✅</span> Dry grocery carry bags & polybags</li>
+              <li><span>✅</span> Clean packaging films & bubble wrap</li>
+              <li><span>✅</span> 0.9 kg CO₂ offset per kg recycled</li>
+              <li><span>⚡</span> Compacted cleanly inside machine</li>
+            </ul>
+            <button class="btn btn-secondary btn-full" data-route="simulator">Deposit Carry Bags</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Credits Estimator Calculator -->
+      <section class="calculator-section">
+        <div class="text-center">
+          <div class="section-tag">Interactive Estimator</div>
+          <h2 class="section-title">Calculate Your Recyclables Credit Payout</h2>
+          <p class="section-desc">
+            Slide to estimate how many EcoCredits you will earn from your campus or household waste.
+          </p>
+        </div>
+
+        <div class="calc-box">
+          <div class="calc-inputs">
+            <!-- PET Slider -->
+            <div class="calc-slider-group">
+              <div class="calc-label-row">
+                <span>🍾 PET Bottles (@ 100 Credits/kg)</span>
+                <span id="calc-pet-val" style="color: var(--primary); font-weight: 700;">2.5 kg</span>
+              </div>
+              <input type="range" min="0" max="15" step="0.5" value="2.5" class="calc-slider" id="calc-pet-slider">
+            </div>
+
+            <!-- Cans Slider -->
+            <div class="calc-slider-group">
+              <div class="calc-label-row">
+                <span>🥫 Aluminum Cans (@ 120 Credits/kg)</span>
+                <span id="calc-can-val" style="color: #8b5cf6; font-weight: 700;">1.0 kg</span>
+              </div>
+              <input type="range" min="0" max="10" step="0.5" value="1.0" class="calc-slider" id="calc-can-slider">
+            </div>
+
+            <!-- Rigid Plastics Slider -->
+            <div class="calc-slider-group">
+              <div class="calc-label-row">
+                <span>📦 Rigid Plastics HDPE (@ 75 Credits/kg)</span>
+                <span id="calc-other-val" style="color: var(--primary); font-weight: 700;">1.0 kg</span>
+              </div>
+              <input type="range" min="0" max="10" step="0.5" value="1.0" class="calc-slider" id="calc-other-slider">
+            </div>
+
+            <!-- Carry Bags Slider -->
+            <div class="calc-slider-group">
+              <div class="calc-label-row">
+                <span>🛍️ Carry Bags (@ 50 Credits/kg)</span>
+                <span id="calc-bag-val" style="color: var(--primary); font-weight: 700;">1.0 kg</span>
+              </div>
+              <input type="range" min="0" max="10" step="0.5" value="1.0" class="calc-slider" id="calc-bag-slider">
+            </div>
+          </div>
+
+          <!-- Calculator Result Panel -->
+          <div class="calc-result-panel">
+            <small>ESTIMATED REWARD</small>
+            <div class="calc-total-earned" id="calc-total-earned">🪙 495 Credits</div>
+            
+            <div class="calc-eco-impact-pills">
+              <div class="calc-impact-pill" id="calc-impact-kg">5.5 kg Plastic & Metal</div>
+              <div class="calc-impact-pill" id="calc-impact-co2">7.2 kg CO₂ Saved</div>
+            </div>
+
+            <button class="btn btn-gold btn-full" data-route="simulator">
+              Deposit & Top Up Card 🚀
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Active RVM Machine Network Status -->
+      <section style="padding: 2.5rem 0 4rem;">
+        <div class="text-center">
+          <div class="section-tag">Connected Smart Kiosks</div>
+          <h2 class="section-title">Active RVM Network & Tap Locations</h2>
+          <p class="section-desc">Tap your EcoCard at any verified reverse vending machine near your campus or metro hub.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+          <div class="glass-panel" style="padding: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+              <span class="badge badge-success">🟢 Active & Online</span>
+              <small style="color: #64748b; font-weight: 700;">RVM-101</small>
+            </div>
+            <h4 style="margin-bottom: 0.3rem;">Central Metro Station</h4>
+            <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 0.6rem;">Exit 2, Near Ticket Counter #3</p>
+            <div style="font-size: 0.8rem; color: #059669; font-weight: 600;">📶 NFC Tap Enabled • Bin 38% Full</div>
+          </div>
+
+          <div class="glass-panel" style="padding: 1.5rem; border-color: var(--primary);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+              <span class="badge badge-success">🟢 Active & Online</span>
+              <small style="color: #64748b; font-weight: 700;">RVM-102</small>
+            </div>
+            <h4 style="margin-bottom: 0.3rem;">University Campus Cafeteria</h4>
+            <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 0.6rem;">Main Quadrangle Entrance</p>
+            <div style="font-size: 0.8rem; color: #059669; font-weight: 600;">📶 NFC Tap Enabled • Bin 64% Full</div>
+          </div>
+
+          <div class="glass-panel" style="padding: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+              <span class="badge badge-success">🟢 Active & Online</span>
+              <small style="color: #64748b; font-weight: 700;">RVM-103</small>
+            </div>
+            <h4 style="margin-bottom: 0.3rem;">Phoenix Mall Atrium</h4>
+            <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 0.6rem;">Ground Floor Food Court Escalator</p>
+            <div style="font-size: 0.8rem; color: #059669; font-weight: 600;">📶 NFC Tap Enabled • Bin 22% Full</div>
+          </div>
+
+          <div class="glass-panel" style="padding: 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+              <span class="badge badge-success">🟢 Active & Online</span>
+              <small style="color: #64748b; font-weight: 700;">RVM-104</small>
+            </div>
+            <h4 style="margin-bottom: 0.3rem;">Tech Park Block 4</h4>
+            <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 0.6rem;">Main Turnstile Reception</p>
+            <div style="font-size: 0.8rem; color: #059669; font-weight: 600;">📶 NFC Tap Enabled • Bin 75% Full</div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ================= PAGE 2: USER DASHBOARD ================= -->
+  <section class="page-view" id="page-dashboard">
+    <div class="container">
+      
+      <!-- Dashboard Welcome Header -->
+      <div class="dashboard-header">
+        <div class="dash-user-welcome">
+          <h2>Welcome back, <span id="dash-welcome-name" class="text-emerald">Rahul</span>! 👋</h2>
+          <p>Here is your real-time recycling activity, EcoCredits balance, and EcoCard status.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn btn-outline" id="btn-dash-manage-card">
+            <span>💳 My EcoCard</span>
+          </button>
+          <button class="btn btn-gold" id="btn-dash-redeem">
+            <span>🎁 Redeem Rewards</span>
+          </button>
+          <button class="btn btn-primary" id="btn-dash-tap-rvm">
+            <span>⚡ Deposit at RVM</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Wallet & EcoCard Banner Grid -->
+      <div class="wallet-hero-card" style="margin-bottom: 2rem;">
+        <div class="wallet-card-grid">
+          <div>
+            <div class="wallet-balance-label">Available EcoCredits Balance</div>
+            <div style="display: flex; align-items: baseline; gap: 0.6rem; margin: 0.4rem 0 1.25rem;">
+              <span style="font-size: 2.2rem;">🪙</span>
+              <div class="wallet-balance-amount" id="dash-credits-balance">1,250</div>
+              <span style="font-size: 1.1rem; color: #a7f3d0; font-weight: 700;">Credits</span>
+            </div>
+
+            <!-- Tier progress bar -->
+            <div style="background: rgba(0, 0, 0, 0.25); border-radius: 10px; padding: 0.85rem; margin-bottom: 1.25rem;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 0.4rem; color: #ecfdf5;">
+                <span id="dash-tier-progress-text">Progress to Next Tier</span>
+                <span class="badge badge-gold" id="dash-eco-tier">Gold Recycler</span>
+              </div>
+              <div style="width: 100%; height: 8px; background: rgba(255, 255, 255, 0.2); border-radius: 999px; overflow: hidden;">
+                <div id="dash-tier-progress-bar" style="width: 65%; height: 100%; background: linear-gradient(90deg, #facc15, #10b981); border-radius: 999px;"></div>
+              </div>
+            </div>
+
+            <div class="wallet-actions">
+              <button class="btn btn-gold" data-route="rewards">
+                <span>🎁 Spend / Redeem Credits</span>
+              </button>
+              <button class="btn btn-secondary" data-route="transactions">
+                <span>📋 View Waste History</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Mini ATM EcoCard Preview Widget -->
+          <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 16px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; backdrop-filter: blur(8px);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; align-items: center; gap: 0.5rem; color: #ffffff; font-weight: 700; font-size: 0.95rem;">
+                <span style="color: #34d399;">💳 EcoCard</span>
+                <span style="font-size: 0.75rem; color: #a7f3d0;">(Contactless NFC)</span>
+              </div>
+              <span id="dash-card-status" class="badge badge-success">🟢 Tap Ready</span>
+            </div>
+
+            <div style="margin: 1.25rem 0;">
+              <small style="color: #94a3b8; font-size: 0.72rem; text-transform: uppercase;">Card Number</small>
+              <div id="dash-card-number" style="font-family: monospace; font-size: 1.2rem; font-weight: 700; color: #ffffff; letter-spacing: 0.08em;">
+                ECO-8842 •••• •••• 5521
+              </div>
+              <div id="dash-card-holder" style="font-size: 0.85rem; color: #a7f3d0; font-weight: 600; text-transform: uppercase; margin-top: 0.2rem;">
+                RAHUL SHARMA
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 0.85rem;">
+              <small style="color: #94a3b8;">Lifetime: <strong id="dash-lifetime-credits" style="color: #fff;">2,450 Credits</strong></small>
+              <button class="btn btn-outline btn-sm" data-route="ecocard" style="font-size: 0.78rem; padding: 0.35rem 0.75rem; color: #ecfdf5; border-color: rgba(255,255,255,0.3);">
+                Card Hub →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Quick Stats Cards -->
+      <div class="dash-stats-grid">
+        <div class="stat-box">
+          <div class="stat-icon">⚖️</div>
+          <div class="stat-info">
+            <h5>Plastic & Metal Recycled</h5>
+            <h3 id="dash-total-recycled">22.5 kg</h3>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-icon">🍾</div>
+          <div class="stat-info">
+            <h5>Items Diverted</h5>
+            <h3 id="dash-bottles-saved">~465 items</h3>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-icon">🌳</div>
+          <div class="stat-info">
+            <h5>Net CO₂ Offset</h5>
+            <h3 id="dash-co2-offset">11.4 kg CO₂</h3>
+          </div>
+        </div>
+
+        <div class="stat-box">
+          <div class="stat-icon">🏆</div>
+          <div class="stat-info">
+            <h5>Campus Standing</h5>
+            <h3>#2 in Campus</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Transactions Section -->
+      <div class="glass-panel" style="padding: 2rem;">
+        <div class="card-header-row">
+          <div>
+            <h3 class="card-title">Recent Waste Deposits & Activity</h3>
+            <p style="color: #64748b; font-size: 0.9rem;">Auto-recorded deposits from smart reverse vending machines and voucher claims</p>
+          </div>
+          <button class="btn btn-outline btn-sm" data-route="transactions">
+            View Full History →
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="eco-table">
+            <thead>
+              <tr>
+                <th>Date & Time</th>
+                <th>Category / Item</th>
+                <th>Machine / Details</th>
+                <th>Weight (kg)</th>
+                <th>Credits Change</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="dash-recent-txns">
+              <!-- Dynamically rendered -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= PAGE 3: MY ECOCARD (ATM CARD HUB) ================= -->
+  <section class="page-view" id="page-ecocard">
+    <div class="container">
+      
+      <div class="text-center" style="margin-bottom: 2.5rem;">
+        <div class="section-tag">Contactless RFID / NFC Hardware Card</div>
+        <h2 class="section-title">My Smart ATM EcoCard</h2>
+        <p class="section-desc">
+          Your personal smart card to tap at any reverse vending machine. Inspect card details, control daily tap limits, or freeze the card if misplaced.
+        </p>
+      </div>
+
+      <!-- 3D Card Interactive Preview Section -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; margin-bottom: 3.5rem;">
+        
+        <!-- Left: 3D Interactive Card Display -->
+        <div>
+          <div class="ecocard-perspective-wrapper">
+            <div class="ecocard-3d" id="ecocard-3d" title="Click card to flip">
+              
+              <!-- Front Face -->
+              <div class="ecocard-face ecocard-front" id="ecocard-front">
+                <div class="ecocard-top-bar">
+                  <div class="card-brand-tag">
+                    <span>🌱 Eco</span>Cash
+                  </div>
+                  <div class="card-status-pill active" id="card-status-badge">
+                    <span class="status-dot-pulse"></span> ACTIVE & READY
+                  </div>
+                </div>
+
+                <div class="card-hardware-row">
+                  <!-- EMV Gold Chip -->
+                  <div class="emv-gold-chip">
+                    <div class="chip-path-center"></div>
+                  </div>
+                  <!-- Contactless Wave Icon -->
+                  <div class="nfc-wave-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+                      <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+                      <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                      <line x1="12" y1="20" x2="12.01" y2="20"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Embossed Card Number -->
+                <div class="card-number-wrapper">
+                  <div class="card-embossed-number" id="card-number-display">
+                    ECO 8842 •••• •••• 5521
+                  </div>
+                </div>
+
+                <!-- Cardholder & Expiry Row -->
+                <div class="card-meta-row">
+                  <div class="card-holder-col">
+                    <small>CARDHOLDER</small>
+                    <div class="card-holder-name" id="card-holder-display">RAHUL SHARMA</div>
+                  </div>
+                  <div class="card-expiry-col" style="text-align: right;">
+                    <small>VALID THRU</small>
+                    <div class="card-expiry-val" id="card-expiry-display">09/31</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Back Face -->
+              <div class="ecocard-face ecocard-back" id="ecocard-back">
+                <div class="magnetic-strip"></div>
+                <div class="back-panel-body">
+                  <div class="signature-row">
+                    <div class="signature-panel">Rahul Sharma</div>
+                    <div class="cvv-box" id="card-cvv-display">842</div>
+                  </div>
+                  <div class="back-notice-text">
+                    This card is issued by EcoCash Reverse Vending Systems for citizen recycling rewards. Tap at any smart RVM sensor or scan barcode. For assistance, contact support@ecocash.in.
+                  </div>
+                  <div class="back-barcode-row">
+                    <span>NFC UID: <strong id="card-chip-uid">NFC-04:A2:8F</strong></span>
+                    <span style="font-family: monospace; font-weight: 700;">BARCODE: <span id="card-barcode-val">884291045521</span></span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Quick Flip & Action Bar -->
+          <div style="display: flex; justify-content: center; gap: 0.75rem; margin-top: 1.5rem;">
+            <button class="btn btn-outline btn-sm" id="btn-flip-card">
+              <span>🔄 Flip Card</span>
+            </button>
+            <button class="btn btn-outline btn-sm" id="btn-toggle-mask">
+              <span>👁️ Reveal</span>
+            </button>
+            <button class="btn btn-outline btn-sm" id="btn-copy-card">
+              <span>📋 Copy Number</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Card Controls & Security Settings -->
+        <div class="glass-panel" style="padding: 2.25rem;">
+          <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem; color: #064e3b;">Card Security & Daily Controls</h3>
+          <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1.75rem;">Manage your physical card settings and vending limits in real time.</p>
+
+          <!-- Freeze Card Action Box -->
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong style="display: block; font-size: 0.95rem; color: #1e293b;">Card Lock Status</strong>
+              <small style="color: #64748b;">Freeze your card immediately if misplaced to prevent unauthorized deposits</small>
+            </div>
+            <button class="btn btn-outline btn-sm" id="btn-freeze-card">
+              <span>❄️ Freeze / Lock Card</span>
+            </button>
+          </div>
+
+          <!-- Daily Tap Limit Slider -->
+          <div style="margin-bottom: 1.75rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <label class="form-label" style="margin-bottom: 0;">Daily Crediting Limit</label>
+              <strong id="card-limit-val" style="color: #059669; font-size: 1.05rem;">1,000 Credits</strong>
+            </div>
+            <input type="range" min="200" max="5000" step="100" value="1000" class="calc-slider" id="card-limit-slider" style="margin-bottom: 0.5rem;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #64748b; margin-bottom: 0.75rem;">
+              <span>Min: 200 Credits</span>
+              <span>Max: 5,000 Credits</span>
+            </div>
+            <button class="btn btn-secondary btn-sm" id="btn-save-limit">
+              Save Daily Limit
+            </button>
+          </div>
+
+          <!-- Card Diagnostics Specs -->
+          <div style="border-top: 1px solid #f1f5f9; padding-top: 1.25rem; font-size: 0.88rem;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem;">
+              <span style="color: #64748b;">Activity Today</span>
+              <strong id="card-taps-today">2 taps today</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem;">
+              <span style="color: #64748b;">Daily Cap</span>
+              <strong id="card-daily-cap">1,000 Credits / day</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1.25rem;">
+              <span style="color: #64748b;">RVM Compatibility</span>
+              <span style="color: #059669; font-weight: 700;">100% Contactless Verified</span>
+            </div>
+
+            <div style="display: flex; gap: 0.75rem;">
+              <button class="btn btn-primary btn-full" id="btn-card-tap-rvm">
+                <span>⚡ Test Tap at RVM</span>
+              </button>
+              <button class="btn btn-outline btn-full" id="btn-replace-card" style="font-size: 0.85rem;">
+                <span>🔄 Replace Card</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= PAGE 4: REVERSE VENDING MACHINE (RVM) SIMULATOR ================= -->
+  <section class="page-view" id="page-simulator">
+    <div class="container">
+      
+      <div class="text-center" style="margin-bottom: 2rem;">
+        <div class="section-tag">Interactive Kiosk & Live Demo Panel</div>
+        <h2 class="section-title">Smart Reverse Vending Machine Kiosk</h2>
+        <p class="section-desc">
+          Simulate a real-time deposit session. Tap your ATM EcoCard on the NFC sensor, choose a recyclable polymer, adjust the weight, and see instant crediting!
+        </p>
+      </div>
+
+      <div class="kiosk-wrapper">
+        <div class="kiosk-chassis">
+          
+          <!-- Kiosk Top Status Bar -->
+          <div class="kiosk-brand-bar">
+            <div>
+              <div class="kiosk-title">ECOCASH RVM-K1000 TERMINAL</div>
+              <small style="color: #94a3b8;">Contactless RFID Sensor & High-Precision Weighing Chamber</small>
+            </div>
+            <div class="kiosk-indicator-lights">
+              <div class="led-indicator">
+                <span class="led-light active-pulse"></span>
+                <span>SYSTEM ONLINE</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kiosk Controls: Target User & Location -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.75rem;">
+            <div>
+              <label class="form-label" style="color: #e2e8f0;">👤 Active User Account</label>
+              <select class="form-select" id="sim-user-select" style="background: #1e293b; color: #fff; border-color: #334155;">
+                <!-- Populated dynamically -->
+              </select>
+            </div>
+            <div>
+              <label class="form-label" style="color: #e2e8f0;">📍 RVM Machine Terminal</label>
+              <select class="form-select" id="sim-machine-select" style="background: #1e293b; color: #fff; border-color: #334155;">
+                <!-- Populated dynamically -->
+              </select>
+            </div>
+          </div>
+
+          <!-- Step 1: Contactless EcoCard Tap Reader Pad -->
+          <label class="form-label" style="color: #e2e8f0; margin-bottom: 0.6rem;">
+            1. Contactless EcoCard Tap Sensor
+          </label>
+          <div class="rvm-nfc-pad" id="rvm-nfc-tap-pad" title="Click or tap to simulate NFC card swipe">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+              <div style="font-size: 2.2rem; background: rgba(16, 185, 129, 0.2); width: 56px; height: 56px; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(52, 211, 153, 0.4);">
+                📶
+              </div>
+              <div>
+                <div style="font-size: 0.8rem; text-transform: uppercase; color: #a7f3d0; font-weight: 700;">NFC Card Reader</div>
+                <div style="color: #ffffff; font-weight: 800; font-size: 1.1rem;" id="rvm-tapped-card-name">Rahul Sharma</div>
+                <small style="color: #94a3b8; font-family: monospace;" id="rvm-tapped-card-num">ECO-8842-9104-5521</small>
+              </div>
+            </div>
+
+            <div style="text-align: right;">
+              <div id="rvm-tapped-card-status" class="text-emerald font-bold">✅ AUTHENTICATED & READY</div>
+              <small style="color: #94a3b8;">Card Balance: <strong id="rvm-tapped-card-balance" style="color: #34d399;">1,250 Credits</strong></small>
+              <div style="margin-top: 0.4rem;">
+                <button type="button" class="btn btn-outline btn-sm" id="btn-rvm-tap-card" style="font-size: 0.75rem; padding: 0.25rem 0.6rem;">
+                  Tap Card Again
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Waste Type Selector Cards -->
+          <label class="form-label" style="color: #e2e8f0; margin-bottom: 0.75rem;">
+            2. Select Recyclable Material Type
+          </label>
+          <div class="waste-select-grid" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="waste-card-option selected" data-waste="pet_bottles">
+              <div class="waste-option-icon">🍾</div>
+              <div class="waste-option-title">PET Bottles</div>
+              <div class="waste-option-rate">100 Cr/kg</div>
+            </div>
+
+            <div class="waste-card-option" data-waste="aluminum_cans">
+              <div class="waste-option-icon">🥫</div>
+              <div class="waste-option-title">Aluminum Cans</div>
+              <div class="waste-option-rate">120 Cr/kg</div>
+            </div>
+
+            <div class="waste-card-option" data-waste="other_plastics">
+              <div class="waste-option-icon">📦</div>
+              <div class="waste-option-title">Rigid HDPE</div>
+              <div class="waste-option-rate">75 Cr/kg</div>
+            </div>
+
+            <div class="waste-card-option" data-waste="carry_bags">
+              <div class="waste-option-icon">🛍️</div>
+              <div class="waste-option-title">Carry Bags</div>
+              <div class="waste-option-rate">50 Cr/kg</div>
+            </div>
+          </div>
+
+          <!-- Step 3: Weight Load Cell Meter -->
+          <label class="form-label" style="color: #e2e8f0; margin-bottom: 0.75rem;">
+            3. Precision Strain-Gauge Load Cell (kg)
+          </label>
+          <div class="weight-meter-box">
+            <div class="weight-display-center">
+              <small style="color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Calibrated Weight</small>
+              <div class="weight-number"><span id="sim-weight-val">1.00</span> <span style="font-size: 1.5rem; color: #94a3b8;">kg</span></div>
+            </div>
+
+            <input type="range" min="0.1" max="10.0" step="0.1" value="1.0" class="calc-slider" id="sim-weight-input" style="margin-bottom: 1.25rem;">
+
+            <!-- Presets -->
+            <div class="weight-presets-bar">
+              <button class="preset-chip" data-weight="0.25">+0.25 kg (~10 items)</button>
+              <button class="preset-chip" data-weight="0.50">+0.50 kg (~20 items)</button>
+              <button class="preset-chip active" data-weight="1.00">+1.00 kg (~45 items)</button>
+              <button class="preset-chip" data-weight="2.50">+2.50 kg (Bulk Drop)</button>
+            </div>
+          </div>
+
+          <!-- Payout Preview Card inside Kiosk -->
+          <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 1.25rem 1.75rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <div style="font-size: 0.8rem; color: #a7f3d0; text-transform: uppercase; font-weight: 700;">Rate Applied</div>
+              <strong id="sim-preview-rate" style="font-size: 1.2rem; color: #ffffff;">100 Credits / kg</strong>
+            </div>
+            <div>
+              <div style="font-size: 0.8rem; color: #a7f3d0; text-transform: uppercase; font-weight: 700;">Items Count</div>
+              <strong id="sim-preview-items" style="font-size: 1.2rem; color: #ffffff;">~45 items</strong>
+            </div>
+            <div>
+              <div style="font-size: 0.8rem; color: #a7f3d0; text-transform: uppercase; font-weight: 700;">CO₂ Offset</div>
+              <strong id="sim-preview-co2" style="font-size: 1.2rem; color: #ffffff;">1.50 kg CO₂</strong>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: 0.8rem; color: #34d399; text-transform: uppercase; font-weight: 800;">Estimated Reward</div>
+              <strong id="sim-preview-credits" style="font-size: 1.9rem; color: #34d399; font-family: var(--font-heading);">+100 Credits</strong>
+            </div>
+          </div>
+
+          <!-- Main Deposit Button -->
+          <button class="btn btn-primary btn-lg btn-full" id="btn-simulate-deposit" style="font-size: 1.15rem; padding: 1.15rem;">
+            <span>🟢 Insert Waste & Credit EcoCard</span>
+          </button>
+
+          <!-- Processing Overlay (Active during simulation) -->
+          <div class="kiosk-processing-overlay" id="kiosk-processing-overlay">
+            <div class="kiosk-spinner"></div>
+            <h3 style="color: #34d399; font-size: 1.5rem; margin: 0;">Processing Deposit...</h3>
+            <p id="kiosk-processing-status" style="color: #cbd5e1; font-weight: 600;">
+              📶 Reading EcoCard chip & contactless session...
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= PAGE 5: WASTE DEPOSIT HISTORY ================= -->
+  <section class="page-view" id="page-transactions">
+    <div class="container">
+      
+      <div class="dashboard-header">
+        <div>
+          <h2>Waste Deposit Ledger & History</h2>
+          <p style="color: #64748b;">Complete itemized record of recyclables deposited into smart vending machines and voucher redemptions.</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <button class="btn btn-outline" id="btn-export-csv">
+            <span>📥 Export to CSV</span>
+          </button>
+          <button class="btn btn-primary" data-route="simulator">
+            <span>⚡ New Deposit</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Filters & Search Toolbar -->
+      <div class="glass-panel" style="padding: 1.5rem; margin-bottom: 1.75rem;">
+        <div class="filter-toolbar">
+          <!-- Category Pills -->
+          <div class="filter-pills">
+            <button class="filter-pill history-filter-pill active" data-filter="all">All Records</button>
+            <button class="filter-pill history-filter-pill" data-filter="pet_bottles">🍾 PET Bottles</button>
+            <button class="filter-pill history-filter-pill" data-filter="aluminum_cans">🥫 Aluminum Cans</button>
+            <button class="filter-pill history-filter-pill" data-filter="carry_bags">🛍️ Carry Bags</button>
+            <button class="filter-pill history-filter-pill" data-filter="other_plastics">📦 Rigid Plastics</button>
+            <button class="filter-pill history-filter-pill" data-filter="redemption">🎟️ Redemptions</button>
+          </div>
+
+          <!-- Search & Sort Controls -->
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <input type="text" class="form-control" id="history-search-input" placeholder="Search Machine / Card / ID..." style="width: 220px; padding: 0.5rem 0.85rem; font-size: 0.88rem;">
+            <select class="form-select" id="history-sort-select" style="width: 170px; padding: 0.5rem 0.85rem; font-size: 0.88rem;">
+              <option value="date-desc">Newest First</option>
+              <option value="date-asc">Oldest First</option>
+              <option value="credits-desc">Most Credits</option>
+              <option value="credits-asc">Least Credits</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.75rem; border-top: 1px solid #f1f5f9;">
+          <small style="color: #64748b; font-weight: 600;" id="history-total-count">Showing records</small>
+          <small style="color: #059669; font-weight: 600;">All rewards tracked in EcoCredits (🪙)</small>
+        </div>
+      </div>
+
+      <!-- Main Ledger Table -->
+      <div class="table-responsive">
+        <table class="eco-table">
+          <thead>
+            <tr>
+              <th>Txn ID & Date</th>
+              <th>Item / Material</th>
+              <th>RVM Location & Card</th>
+              <th>Weight (kg)</th>
+              <th>Rate / Impact</th>
+              <th>Credits</th>
+              <th>Receipt / Status</th>
+            </tr>
+          </thead>
+          <tbody id="history-table-body">
+            <!-- Rendered dynamically -->
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= PAGE 6: REDEEM REWARDS (REDEEMABLE OPTIONS) ================= -->
+  <section class="page-view" id="page-rewards">
+    <div class="container">
+      
+      <div class="dashboard-header">
+        <div>
+          <h2>Redeemable Options & Rewards Catalog</h2>
+          <p style="color: #64748b;">Spend your accumulated EcoCredits on partner cafeteria meals, transit passes, eco-merch, and tree planting.</p>
+        </div>
+        <div style="background: var(--primary-50); border: 1px solid var(--primary-200); border-radius: 12px; padding: 0.75rem 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
+          <span style="font-size: 1.5rem;">🪙</span>
+          <div>
+            <small style="color: #065f46; font-weight: 700; text-transform: uppercase;">Your Credit Balance</small>
+            <div style="font-weight: 800; font-size: 1.2rem; color: #059669;" id="rewards-user-balance">1,250 Credits</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category Filter Toolbar -->
+      <div class="glass-panel" style="padding: 1.25rem; margin-bottom: 2rem;">
+        <div class="filter-toolbar">
+          <div class="filter-pills">
+            <button class="filter-pill reward-category-pill active" data-category="all">All Rewards</button>
+            <button class="filter-pill reward-category-pill" data-category="food">☕ Food & Drinks</button>
+            <button class="filter-pill reward-category-pill" data-category="transit">🚇 Transit Passes</button>
+            <button class="filter-pill reward-category-pill" data-category="merch">🍶 Eco Merchandise</button>
+            <button class="filter-pill reward-category-pill" data-category="impact">🌳 Green Impact</button>
+          </div>
+
+          <input type="text" class="form-control" id="rewards-search-input" placeholder="Search vouchers, coffee, metro..." style="width: 250px; padding: 0.5rem 0.85rem; font-size: 0.88rem;">
+        </div>
+      </div>
+
+      <!-- Rewards Catalog Grid -->
+      <div class="rewards-catalog-grid" id="rewards-catalog-grid">
+        <!-- Dynamically rendered -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= PAGE 7: LEADERBOARD ================= -->
+  <section class="page-view" id="page-leaderboard">
+    <div class="container">
+      
+      <div class="text-center" style="margin-bottom: 2rem;">
+        <div class="section-tag">Campus & Community Champions</div>
+        <h2 class="section-title">EcoCash Recycler Leaderboard</h2>
+        <p class="section-desc">
+          Honoring top recyclers who are keeping our cities clean, reducing landfill waste, and turning plastic into positive impact.
+        </p>
+      </div>
+
+      <!-- Current User Rank Banner -->
+      <div class="user-rank-highlight-banner" id="user-rank-banner">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Top 3 Podium -->
+      <div class="leaderboard-podium" id="leaderboard-podium">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <!-- Full Ranking Table -->
+      <div class="glass-panel" style="padding: 2rem;">
+        <h3 class="card-title" style="margin-bottom: 1.25rem;">Overall Recycler Standings</h3>
+        <div class="table-responsive">
+          <table class="eco-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Recycler Name</th>
+                <th>Eco Tier</th>
+                <th>Total Plastic & Metal (kg)</th>
+                <th>Lifetime EcoCredits</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboard-table-body">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= PAGE 8: PROFILE & ECOCARD SETTINGS ================= -->
+  <section class="page-view" id="page-profile">
+    <div class="container">
+      
+      <div class="dashboard-header">
+        <div>
+          <h2>Account & EcoCard Profile</h2>
+          <p style="color: #64748b;">Manage your personal profile, linked ATM EcoCard hardware, and unlocked recycling milestones.</p>
+        </div>
+        <button class="btn btn-danger btn-sm" id="btn-reset-demo-data" title="Reset mock data to fresh state">
+          🔄 Reset Demo Data
+        </button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 2.5rem;">
+        
+        <!-- Profile Summary Card -->
+        <div class="glass-panel text-center" style="padding: 2.5rem 1.5rem;">
+          <div style="font-size: 3.8rem; width: 90px; height: 90px; background: var(--primary-50); border: 2px solid var(--primary-200); border-radius: 50%; margin: 0 auto 1.25rem; display: flex; align-items: center; justify-content: center;" id="profile-header-avatar">
+            👨‍💼
+          </div>
+          <h3 style="font-size: 1.4rem; margin-bottom: 0.25rem;" id="profile-header-name">Rahul Sharma</h3>
+          <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;" id="profile-header-email">rahul.sharma@ecocash.in</p>
+          <div style="margin-bottom: 1.75rem;">
+            <span class="badge badge-gold" id="profile-header-tier">Gold Recycler</span>
+          </div>
+
+          <!-- Linked EcoCard Highlight -->
+          <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1rem; text-align: left; margin-bottom: 1.5rem;">
+            <small style="color: #64748b; text-transform: uppercase; font-weight: 700; font-size: 0.72rem; display: block; margin-bottom: 0.2rem;">Linked EcoCard</small>
+            <strong id="prof-card-number" style="font-family: monospace; font-size: 0.95rem; color: #065f46; display: block; margin-bottom: 0.3rem;">
+              ECO-8842-9104-5521
+            </strong>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem;">
+              <span id="prof-card-status" class="badge badge-success">🟢 Active & Ready</span>
+              <span id="prof-card-limit" style="color: #64748b;">1,000 Cr/day</span>
+            </div>
+            <div style="margin-top: 0.75rem;">
+              <button class="btn btn-outline btn-sm btn-full" id="btn-prof-manage-card" style="font-size: 0.78rem; padding: 0.35rem;">
+                Open EcoCard Hub 💳
+              </button>
+            </div>
+          </div>
+
+          <div style="border-top: 1px solid #e2e8f0; padding-top: 1.25rem; text-align: left; font-size: 0.88rem;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem;">
+              <span style="color: #64748b;">Card NFC UID</span>
+              <span id="prof-card-chip" style="font-family: monospace; font-weight: 600;">NFC-04:A2:8F</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem;">
+              <span style="color: #64748b;">Verification</span>
+              <span style="color: #059669; font-weight: 700;">✅ Verified</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: #64748b;">Card Security</span>
+              <span style="color: #059669; font-weight: 600;">EMV Chip Active</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Edit Form & Badges -->
+        <div>
+          <!-- Edit Form -->
+          <div class="glass-panel" style="padding: 2.25rem; margin-bottom: 2rem;">
+            <form id="profile-form">
+              <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 0.75rem;">
+                Personal Details
+              </h3>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                <div class="form-group">
+                  <label class="form-label">Full Name</label>
+                  <input type="text" class="form-control" id="profile-name" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Email Address</label>
+                  <input type="email" class="form-control" id="profile-email" readonly style="background: #f8fafc; cursor: not-allowed;">
+                  <span class="form-help">Contact support to change email</span>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                <div class="form-group">
+                  <label class="form-label">Phone Number</label>
+                  <input type="tel" class="form-control" id="profile-phone" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Profile Avatar</label>
+                  <select class="form-select" id="profile-avatar-select">
+                    <option value="👨‍💼">👨‍💼 Professional</option>
+                    <option value="👩‍🔬">👩‍🔬 Scientist</option>
+                    <option value="👨‍🎓">👨‍🎓 Student</option>
+                    <option value="👩‍💼">👩‍💼 Manager</option>
+                    <option value="🌱">🌱 Eco Sprout</option>
+                    <option value="🌍">🌍 Earth Guardian</option>
+                  </select>
+                </div>
+              </div>
+
+              <div style="text-align: right; margin-top: 1rem;">
+                <button type="submit" class="btn btn-primary">
+                  <span>Save Profile Changes</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Unlocked Milestone Badges -->
+          <div class="glass-panel" style="padding: 2rem;">
+            <h3 style="font-size: 1.25rem; margin-bottom: 1.25rem;">
+              Recycling Achievements & Badges
+            </h3>
+            <div id="profile-badges-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= PAGE 9: ABOUT & HARDWARE SPECS ================= -->
+  <section class="page-view" id="page-about">
+    <div class="container">
+      
+      <div class="text-center" style="margin-bottom: 3rem;">
+        <div class="section-tag">Circular Economy & IoT Hardware</div>
+        <h2 class="section-title">About the EcoCash Reverse Vending Platform</h2>
+        <p class="section-desc">
+          Empowering citizens through contactless smart card technology and automated reverse vending machines.
+        </p>
+      </div>
+
+      <!-- Mission Highlights -->
+      <div class="glass-panel" style="padding: 2.5rem; margin-bottom: 2.5rem;">
+        <h3 style="font-size: 1.6rem; color: #064e3b; margin-bottom: 1rem;">Closing the Plastic Loop with Instant Rewards</h3>
+        <p style="font-size: 1.05rem; color: #334155; line-height: 1.7; margin-bottom: 1.25rem;">
+          India produces over 3.4 million tonnes of plastic waste annually. Traditional collection relies heavily on unorganized scavenging. 
+          <strong>EcoCash</strong> transforms consumer habits by placing smart Reverse Vending Machines (RVMs) in colleges, metro stations, and office parks, paired with personalized <strong>ATM-style EcoCards</strong>.
+        </p>
+        <p style="font-size: 1.05rem; color: #334155; line-height: 1.7;">
+          Citizens tap their card, deposit clean empty containers, and earn guaranteed EcoCredits. These credits circulate in campus dining halls, metro transit gates, and eco-merchandise stores, creating a sustainable closed-loop ecosystem.
+        </p>
+      </div>
+
+      <!-- Technical Architecture -->
+      <div class="tech-spec-grid">
+        <div class="spec-item">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">📶</div>
+          <h4>RFID / NFC Tap Module</h4>
+          <p style="color: #64748b; font-size: 0.92rem;">
+            High-frequency 13.56 MHz contactless reader paired with EMV secure element that instantly authenticates the user's physical EcoCard in under 200 milliseconds.
+          </p>
+        </div>
+
+        <div class="spec-item">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">📷</div>
+          <h4>Optical Polymer Classifier</h4>
+          <p style="color: #64748b; font-size: 0.92rem;">
+            Dual high-speed optical vision cameras that distinguish transparent PET water bottles from rigid HDPE milk jugs and aluminum beverage cans.
+          </p>
+        </div>
+
+        <div class="spec-item">
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚙️</div>
+          <h4>Internal Shredder Compactor</h4>
+          <p style="color: #64748b; font-size: 0.92rem;">
+            Heavy-duty rotary crushing rollers that compress bottles and cans by 85%, allowing up to 1,200 containers per machine bin before collection.
+          </p>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="glass-panel" style="max-width: 680px; margin: 3rem auto 0; padding: 2.5rem;">
+        <div class="text-center" style="margin-bottom: 1.75rem;">
+          <h3 style="font-size: 1.45rem;">Request RVM Installation / Partner With Us</h3>
+          <p style="color: #64748b; font-size: 0.9rem;">Want an EcoCash smart reverse vending kiosk installed at your university or tech park?</p>
+        </div>
+
+        <form id="contact-form">
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input type="text" class="form-control" placeholder="Ashif Rahul" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-control" placeholder="ashif@example.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Organization / Campus</label>
+              <input type="text" class="form-control" placeholder="College / Tech Park" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Message / Inquiry</label>
+            <textarea class="form-control" rows="4" placeholder="Tell us about your campus and estimated daily footfall..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full btn-lg">
+            Send Inquiry 🚀
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= MODAL 1: LOGIN ================= -->
+  <div class="modal-overlay" id="modal-login">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title"><span>🔑</span> Log In to EcoCash</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Expo Quick Demo Selection -->
+        <div style="background: var(--primary-50); border: 1px solid var(--primary-200); border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem;">
+          <div style="font-size: 0.8rem; font-weight: 700; color: #065f46; text-transform: uppercase; margin-bottom: 0.5rem;">
+            ⚡ Quick Expo Demo Profiles (1-Click)
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+            <button class="btn btn-outline btn-sm btn-quick-login" data-user="user_1" style="background: #fff; font-size: 0.8rem;">
+              👨‍💼 Rahul (1,250 Cr)
+            </button>
+            <button class="btn btn-outline btn-sm btn-quick-login" data-user="user_2" style="background: #fff; font-size: 0.8rem;">
+              👩‍🔬 Priya (860 Cr)
+            </button>
+            <button class="btn btn-outline btn-sm btn-quick-login" data-user="user_4" style="background: #fff; font-size: 0.8rem;">
+              👩‍💼 Ananya (2,180 Cr)
+            </button>
+            <button class="btn btn-outline btn-sm btn-quick-login" data-user="user_3" style="background: #fff; font-size: 0.8rem;">
+              👨‍🎓 Amit (320 Cr)
+            </button>
+          </div>
+        </div>
+
+        <form id="login-form">
+          <div class="form-group">
+            <label class="form-label">Email Address or Phone Number</label>
+            <input type="text" class="form-control" id="login-identifier" value="rahul.sharma@ecocash.in" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" id="login-password" value="password123" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full btn-lg" style="margin-top: 1rem;">
+            Log In
+          </button>
+        </form>
+
+        <div class="text-center" style="margin-top: 1.25rem; font-size: 0.9rem;">
+          <span>Don't have an account yet? </span>
+          <a href="#" id="link-to-signup" style="font-weight: 700;">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL 2: SIGN UP ================= -->
+  <div class="modal-overlay" id="modal-signup">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title"><span>🌱</span> Create EcoCash Account & EcoCard</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="signup-form">
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input type="text" class="form-control" id="signup-name" placeholder="e.g. Ashif Rahul" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email Address *</label>
+            <input type="email" class="form-control" id="signup-email" placeholder="e.g. ashif@example.com" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Phone Number *</label>
+            <input type="tel" class="form-control" id="signup-phone" placeholder="e.g. +91 98765 43210" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Password *</label>
+            <input type="password" class="form-control" id="signup-password" placeholder="Create a strong password" required>
+          </div>
+
+          <div style="background: #f0fdf4; border: 1px solid var(--primary-200); border-radius: 10px; padding: 0.85rem; margin: 1rem 0; font-size: 0.85rem; color: #065f46;">
+            💳 <strong>Smart ATM EcoCard Included:</strong> An instant contactless EcoCard with 100 bonus welcome credits will be automatically generated upon signup!
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full btn-lg" style="margin-top: 0.5rem;">
+            Complete Sign Up & Generate Card
+          </button>
+        </form>
+
+        <div class="text-center" style="margin-top: 1.25rem; font-size: 0.9rem;">
+          <span>Already registered? </span>
+          <a href="#" id="link-to-login" style="font-weight: 700;">Log In</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL 3: DIGITAL DEPOSIT RECEIPT ================= -->
+  <div class="modal-overlay" id="modal-receipt">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title"><span>🧾</span> Reverse Vending Receipt</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <div class="digital-receipt">
+          <div class="receipt-header">
+            <div class="receipt-logo">🌱 ECOCASH REVERSE VENDING</div>
+            <div style="font-size: 0.78rem; color: #64748b;">Smart Waste Recovery Network</div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: #059669; margin-top: 0.25rem;">
+              TRANSACTION CONFIRMED & CREDITED
+            </div>
+          </div>
+
+          <div class="receipt-row">
+            <span style="color: #64748b;">Receipt ID</span>
+            <strong id="receipt-txn-id">TXN-80921</strong>
+          </div>
+
+          <div class="receipt-row">
+            <span style="color: #64748b;">Timestamp</span>
+            <span id="receipt-date">14 Sep 2026 14:32</span>
+          </div>
+
+          <div class="receipt-row">
+            <span style="color: #64748b;">Account Holder</span>
+            <strong id="receipt-user">Rahul Sharma</strong>
+          </div>
+
+          <div class="receipt-row">
+            <span style="color: #64748b;">Card Tapped</span>
+            <strong id="receipt-card-used" style="font-family: monospace; color: #065f46;">ECO-8842-9104-5521</strong>
+          </div>
+
+          <div class="receipt-row">
+            <span style="color: #64748b;">Machine Kiosk</span>
+            <span id="receipt-machine">RVM-102 (Campus Cafeteria)</span>
+          </div>
+
+          <div style="border-top: 1px dashed #e2e8f0; margin: 0.8rem 0;"></div>
+
+          <div class="receipt-row">
+            <span style="color: #64748b;">Material Category</span>
+            <strong id="receipt-waste">PET Bottles</strong>
+          </div>
+
+          <div class="receipt-row">
+            <span style="color: #64748b;">Measured Net Weight</span>
+            <span id="receipt-weight">1.50 kg (~35 items)</span>
+          </div>
+
+          <div class="receipt-row">
+            <span style="color: #64748b;">Official Credit Rate</span>
+            <span id="receipt-rate">100 Credits / kg</span>
+          </div>
+
+          <div class="receipt-row">
+            <span style="color: #64748b;">CO₂ Offset Saved</span>
+            <span id="receipt-co2" style="color: #059669; font-weight: 700;">2.25 kg CO₂</span>
+          </div>
+
+          <div class="receipt-total">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span>Credits Added to Card:</span>
+              <span id="receipt-credits" style="color: #059669; font-size: 1.4rem;">+150 Credits</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; text-align: center;">
+          <button class="btn btn-primary btn-full btn-modal-close">
+            Done & Return
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL 4: CONFIRM REDEEM REWARD ================= -->
+  <div class="modal-overlay" id="modal-confirm-redeem">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title"><span>🎁</span> Confirm Reward Redemption</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+          <h3 id="redeem-item-title" style="font-size: 1.35rem; margin-bottom: 0.25rem;">Artisan Fresh Brew Coffee</h3>
+          <p id="redeem-item-partner" style="color: #64748b; font-size: 0.9rem;">Café GreenBean</p>
+        </div>
+
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem;">
+            <span style="color: #64748b;">Reward Cost</span>
+            <strong id="redeem-item-cost" style="color: #d97706;">120 Credits</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem;">
+            <span style="color: #64748b;">Your Current Balance</span>
+            <span id="redeem-user-avail" style="font-weight: 600;">1,250 Credits</span>
+          </div>
+          <div style="border-top: 1px solid #e2e8f0; padding-top: 0.6rem; display: flex; justify-content: space-between;">
+            <span style="font-weight: 700; color: #1e293b;">Balance After Redemption</span>
+            <strong id="redeem-balance-remaining" style="color: #059669;">1,130 Credits</strong>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-primary btn-lg btn-full" id="btn-execute-redeem">
+          Confirm & Generate Voucher 🎟️
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL 5: VOUCHER TICKET (SUCCESS) ================= -->
+  <div class="modal-overlay" id="modal-voucher-ticket">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title"><span>🎟️</span> Reward Voucher Claimed!</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <div class="voucher-ticket-box">
+          <div style="text-align: center; margin-bottom: 0.75rem;">
+            <div style="font-size: 0.75rem; text-transform: uppercase; font-weight: 800; color: #065f46; letter-spacing: 0.08em;">
+              OFFICIAL ECOCASH REWARD COUPON
+            </div>
+            <h3 id="voucher-reward-title" style="font-size: 1.25rem; margin: 0.25rem 0; color: #064e3b;">Artisan Coffee</h3>
+            <p id="voucher-partner-name" style="color: #64748b; font-size: 0.85rem; margin: 0;">Partner: Café GreenBean</p>
+          </div>
+
+          <!-- Voucher Code Banner -->
+          <div class="voucher-code-banner">
+            <div>
+              <small style="font-size: 0.68rem; color: #065f46; font-weight: 700; text-transform: uppercase; display: block;">VOUCHER CODE</small>
+              <div class="voucher-code-text" id="voucher-code-display">ECO-COF-88429</div>
+            </div>
+          </div>
+
+          <!-- QR Code Mockup -->
+          <div class="qr-placeholder-box">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <span style="margin-top: 0.3rem;">Scan at Counter</span>
+          </div>
+
+          <div style="text-align: center; font-size: 0.8rem; color: #475569;">
+            Credits Spent: <strong id="voucher-credits-spent" style="color: #059669;">120 Credits</strong> • Issued: <span id="voucher-created-date">Today</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem;">
+          <button type="button" class="btn btn-outline btn-full" id="btn-copy-voucher">
+            📋 Copy Code
+          </button>
+          <button type="button" class="btn btn-primary btn-full btn-modal-close">
+            Done
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL 6: SWITCH USER (EXPO DEMO) ================= -->
+  <div class="modal-overlay" id="modal-user-switch">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title"><span>👥</span> Active Profiles & EcoCards</h3>
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="color: #64748b; font-size: 0.88rem; margin-bottom: 1.25rem;">
+          Click on any pre-loaded demo account to switch the active profile and EcoCard immediately:
+        </p>
+
+        <div id="user-switch-list">
+          <!-- Populated dynamically -->
+        </div>
+
+        <div style="border-top: 1px solid #f1f5f9; padding-top: 1rem; margin-top: 1rem; display: flex; justify-content: space-between;">
+          <button class="btn btn-danger btn-sm" id="btn-sign-out">Sign Out</button>
+          <button class="btn btn-outline btn-sm btn-modal-close">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= Site Footer ================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Col 1: Brand Info -->
+        <div class="footer-brand">
+          <h3>
+            <span style="color: #10b981;">🌱</span> Eco<span style="color: #34d399;">cash</span>
+          </h3>
+          <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.25rem;">
+            Smart reverse vending network connecting contactless ATM EcoCards with automated waste recovery. Deposit plastic & metal, earn EcoCredits, and close the loop.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-btn" title="GitHub">🐙</a>
+            <a href="#" class="social-btn" title="LinkedIn">💼</a>
+            <a href="#" class="social-btn" title="Twitter / X">🐦</a>
+            <a href="#" class="social-btn" title="Instagram">📸</a>
+          </div>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div class="footer-links-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links-list">
+            <li><a href="#home" data-route="home">Home</a></li>
+            <li><a href="#dashboard" data-route="dashboard">Dashboard</a></li>
+            <li><a href="#ecocard" data-route="ecocard">My EcoCard</a></li>
+            <li><a href="#simulator" data-route="simulator">RVM Simulator</a></li>
+            <li><a href="#transactions" data-route="transactions">Waste History</a></li>
+            <li><a href="#rewards" data-route="rewards">Redeem Rewards</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Credit Rates -->
+        <div class="footer-links-col">
+          <h4>Credit Rate Card</h4>
+          <ul class="footer-links-list">
+            <li><a href="#simulator">PET Bottles (100 Cr/kg)</a></li>
+            <li><a href="#simulator">Aluminum Cans (120 Cr/kg)</a></li>
+            <li><a href="#simulator">Rigid HDPE (75 Cr/kg)</a></li>
+            <li><a href="#simulator">Carry Bags (50 Cr/kg)</a></li>
+            <li><a href="#rewards">Rewards Marketplace</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Project Info -->
+        <div class="footer-links-col">
+          <h4>College Expo Demonstration</h4>
+          <p style="font-size: 0.85rem; line-height: 1.6; margin-bottom: 1rem;">
+            Built with HTML5, Vanilla CSS, and JavaScript with client-side reactive store. Ready for IoT RFID microcontrollers and Reverse Vending hardware.
+          </p>
+          <div style="background: #1e293b; padding: 0.75rem 1rem; border-radius: 8px; border: 1px solid #334155; font-size: 0.8rem; color: #a7f3d0;">
+            🟢 EcoCard RFID Reader: 100% Operational
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 EcoCash Systems. All rights reserved. Designed for College / Expo Demonstration.</div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="#about" style="color: #64748b;">Terms of Service</a>
+          <a href="#about" style="color: #64748b;">Privacy Policy</a>
+          <a href="#about" style="color: #64748b;">Hardware Partners</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= Core Scripts ================= -->
+  <script src="js/store.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/ecocard.js"></script>
+  <script src="js/rewards.js"></script>
+  <script src="js/simulator.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/transactions.js"></script>
+  <script src="js/leaderboard.js"></script>
+  <script src="js/profile.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
