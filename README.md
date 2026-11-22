@@ -9,6 +9,16 @@ EcoCash is a recycling incentive platform concept that combines a smart reverse 
 
 ---
 
+## Project visuals
+
+### Proposed EcoCash smart reverse vending machine
+![EcoCash smart reverse vending machine concept](assets/ecocash-rvm.jpg)
+
+### How the EcoCard and RVM ecosystem works
+![EcoCard and RVM ecosystem workflow](assets/ecocash-workflow.jpg)
+
+---
+
 ## Table of contents
 - [Problem](#problem)
 - [Proposed solution](#proposed-solution)
@@ -19,7 +29,6 @@ EcoCash is a recycling incentive platform concept that combines a smart reverse 
 - [Technology stack](#technology-stack)
 - [Implementation status](#implementation-status)
 - [Future enhancements](#future-enhancements)
-- [Project team](#project-team)
 - [Research references](#research-references)
 
 ## Problem
@@ -138,19 +147,6 @@ The prototype currently demonstrates the web-side experience. Integration with t
 - Add a mobile application and QR option alongside the EcoCard.
 - Integrate with government transit and civic reward systems and partner-shop billing.
 - Explore solar-powered kiosks, remote monitoring and predictive bin collection.
-
-## Project team
-
-**Department of Artificial Intelligence and Machine Learning**  
-**Francis Xavier Engineering College**
-
-| Team member | Presentation responsibility |
-|---|---|
-| Palvannan A | Introduction and literature survey |
-| Peer Mohammed S | Existing system, proposed system and modules |
-| Tasleem Ahamed S | Implementation, requirements, challenges and conclusion |
-
-**Project guide:** Mrs. V. Selina Annie Retna, Department of AIML.
 
 ## Research references
 
