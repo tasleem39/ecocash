@@ -45,6 +45,12 @@ class RvmSimulator {
     this.processingOverlay = document.getElementById('kiosk-processing-overlay');
     this.processingStatus = document.getElementById('kiosk-processing-status');
 
+    // Optical intake chamber visual demo
+    this.opticalChamber = document.getElementById('rvm-optical-chamber');
+    this.opticalStatus = document.getElementById('rvm-optical-status');
+    this.opticalPercent = document.getElementById('rvm-optical-percent');
+    this.opticalProgress = document.getElementById('rvm-optical-progress');
+
     // NFC Card Scanner
     this.btnTapCard = document.getElementById('btn-rvm-tap-card');
     this.cardTapPad = document.getElementById('rvm-nfc-tap-pad');
@@ -224,6 +230,19 @@ class RvmSimulator {
     if (this.previewItems) this.previewItems.textContent = `~${itemsCount} items`;
   }
 
+  setOpticalScan(state, percent = 0, message = 'Waiting for deposit') {
+    if (!this.opticalChamber) return;
+    this.opticalChamber.classList.toggle('is-scanning', state === 'scanning');
+    this.opticalChamber.classList.toggle('is-complete', state === 'complete');
+    const live = this.opticalChamber.querySelector('.rvm-chamber-live');
+    if (live) live.innerHTML = state === 'scanning'
+      ? '<span></span> SCANNING'
+      : state === 'complete' ? '<span></span> IDENTIFIED' : '<span></span> READY';
+    if (this.opticalStatus) this.opticalStatus.textContent = message;
+    if (this.opticalPercent) this.opticalPercent.textContent = `${percent}%`;
+    if (this.opticalProgress) this.opticalProgress.style.width = `${percent}%`;
+  }
+
   async handleDeposit() {
     if (this.isProcessing) return;
 
@@ -251,16 +270,24 @@ class RvmSimulator {
 
     const steps = [
       { text: '📶 Reading EcoCard chip & contactless session...', sound: () => window.ecoAudio?.playBeep(480, 'sine', 0.08) },
-      { text: '📷 Optical camera scanning polymer & barcode...', sound: () => window.ecoAudio?.playBeep(620, 'sine', 0.08) },
+      { text: '📷 Optical camera scanning polymer & barcode...', sound: () => window.ecoAudio?.playBeep(620, 'sine', 0.08), optical: true },
       { text: '⚖️ Calibrating strain-gauge load cell weight...', sound: () => window.ecoAudio?.playBeep(740, 'sine', 0.08) },
       { text: '⚙️ Activating high-torque compactor rollers...', sound: () => window.ecoAudio?.playMotorHum() },
       { text: '🪙 Crediting user EcoCard balance...', sound: () => window.ecoAudio?.playSuccess() }
     ];
 
-    for (const step of steps) {
+    for (const [index, step] of steps.entries()) {
       if (this.processingStatus) this.processingStatus.textContent = step.text;
+      if (step.optical) {
+        this.setOpticalScan('scanning', 12, 'Optical sensor acquiring item profile...');
+        for (const progress of [28, 52, 76, 100]) {
+          await new Promise(r => setTimeout(r, 300));
+          this.setOpticalScan('scanning', progress, progress < 100 ? 'Scanning material shape & surface...' : 'Scan complete · material profile captured');
+        }
+        this.setOpticalScan('complete', 100, 'Item profile captured · continuing demo');
+      }
       if (step.sound) step.sound();
-      await new Promise(r => setTimeout(r, 650));
+      await new Promise(r => setTimeout(r, step.optical ? 150 : 650));
     }
 
     // Execute deposit in store
@@ -271,6 +298,9 @@ class RvmSimulator {
       wasteTypeId: this.selectedWaste,
       weightKg: this.currentWeight
     });
+
+    // Reset the optical chamber after the simulated scan cycle
+    this.setOpticalScan('ready', 0, 'Waiting for deposit');
 
     // Hide overlay
     if (this.processingOverlay) this.processingOverlay.classList.remove('active');
