@@ -9,13 +9,13 @@ EcoCash is a recycling incentive platform concept that combines a smart reverse 
 
 ---
 
-## Project visuals
+## Project Visuals
 
-### Proposed EcoCash smart reverse vending machine
-![EcoCash smart reverse vending machine concept](assets/ecocash-rvm.jpg)
+### EcoCash Smart RVM Kiosk
+![EcoCash Kiosk](assets/Kiosk_ecocash.png)
 
-### How the EcoCard and RVM ecosystem works
-![EcoCard and RVM ecosystem workflow](assets/ecocash-workflow.jpg)
+### EcoCard & RVM Workflow
+![EcoCash Workflow](assets/workflow_ecocash.png)
 
 ---
 
