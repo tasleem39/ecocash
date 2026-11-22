@@ -1,4 +1,4 @@
-# EcoCash ♻️
+# EcoCash – A Reverse Vending Machine with Digital Rewards
 ### An Automated IoT-Enabled Reverse Vending Machine and Contactless Smart Card Ecosystem
 
 EcoCash is a recycling incentive platform concept that combines a smart reverse vending machine (RVM), a contactless NFC EcoCard and a web-based rewards ledger. It is designed to make recycling more convenient by identifying and weighing deposited waste, awarding credits and allowing users to redeem those credits for practical rewards.
@@ -163,3 +163,9 @@ The project literature survey refers to the following works:
 ---
 
 *EcoCash aims to make recycling more accessible by connecting responsible waste disposal with transparent, practical incentives.*
+
+---
+
+## Know About Me
+
+I am an undergraduate student pursuing a B.E. in Artificial Intelligence and Machine Learning. I enjoy building practical projects, exploring new technologies, and applying programming and problem-solving skills to real-world challenges.
