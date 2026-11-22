@@ -861,7 +861,30 @@
             </div>
           </div>
 
-          <!-- Step 3: Weight Load Cell Meter -->
+          <!-- Optical intake chamber: visual scanning simulation -->
+          <label class="form-label" style="color: #e2e8f0; margin-bottom: 0.75rem;">
+            3. Optical Intake & Material Scan
+          </label>
+          <div class="rvm-optical-chamber" id="rvm-optical-chamber" aria-live="polite">
+            <div class="rvm-chamber-topline">
+              <span class="rvm-chamber-camera">◉ OPTICAL SENSOR</span>
+              <span class="rvm-chamber-live"><span></span> READY</span>
+            </div>
+            <div class="rvm-chamber-aperture">
+              <div class="rvm-chamber-grid"></div>
+              <div class="rvm-chamber-item" aria-hidden="true">♻️</div>
+              <div class="rvm-chamber-scanline"></div>
+              <div class="rvm-chamber-corners" aria-hidden="true"></div>
+            </div>
+            <div class="rvm-chamber-readout">
+              <span class="rvm-chamber-status" id="rvm-optical-status">Waiting for deposit</span>
+              <span class="rvm-chamber-percent" id="rvm-optical-percent">0%</span>
+            </div>
+            <div class="rvm-chamber-progress"><span id="rvm-optical-progress"></span></div>
+            <p class="rvm-chamber-note">Visual demo only · camera-based identification is planned hardware functionality</p>
+          </div>
+
+          <!-- Step 4: Weight Load Cell Meter -->
           <label class="form-label" style="color: #e2e8f0; margin-bottom: 0.75rem;">
             3. Precision Strain-Gauge Load Cell (kg)
           </label>
